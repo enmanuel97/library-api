@@ -1,6 +1,7 @@
-const config 	= require('./config');
 const mysql 	= require('mysql2/promise');
 const { Sequelize, Op, QueryTypes } = require('sequelize');
+const env = process.env.NODE_ENV || 'development';
+const config = require('./config/config.json')[env];
 
 module.exports = db = {};
 
@@ -8,14 +9,14 @@ initialize();
 
 async function initialize() {
 
-	const { host, port, user, password, database } = config.database;
+	const { host, port, user, password, database } = config;
   
     const connection = await mysql.createConnection({ host, port, user, password });
     await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
 
     const sequelize = new Sequelize(database, user, password, { 
         host: host,
-        dialect: 'mysql' 
+        dialect: 'mysql',
     });
     
     db.Op 			= Op;
