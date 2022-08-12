@@ -13,8 +13,12 @@ function model(sequelize) {
 			type: DataTypes.STRING,
             allowNull: false
 		},
+		author: {
+			type: DataTypes.STRING,
+            allowNull: true
+		},
         resume: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
         },
         publiched_at: {
             type: DataTypes.DATE,

@@ -30,13 +30,25 @@ async function getBook(req, res, id) {
             
             if(urlDevided.length > 1) {
                 // get book pages
-                const page = await db.Pages.findByPk(urlDevided[2])
+                const page = await db.Pages.findOne({
+                    where: {
+                        book_id: id,
+                        id: urlDevided[2]
+                    }
+                })
                 if(!page) {
                     res.writeHead(404, { 'Content-Type': 'application/json' })
-                    res.end(JSON.stringify({ message: 'Page Not Found' }))
+                    res.end(JSON.stringify({ message: `Page ${urlDevided[2]} Not Found` }))
                 } else {
-                    res.writeHead(200, { 'Content-Type': 'application/json' })
-                    res.end(JSON.stringify([book, page]))
+                    var format = urlDevided[3] ? urlDevided[3] : 'html';
+
+                    if(format === 'html') {
+                        res.writeHead(200, { 'Content-Type': 'text/html' })
+                        res.end(`<p>${page.content}</p>`)
+                    } else {
+                        res.writeHead(200, { 'Content-Type': 'application/json' })
+                        res.end(JSON.stringify([page]))
+                    }                    
                 }
             } else {
                 res.writeHead(200, { 'Content-Type': 'application/json' })

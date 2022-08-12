@@ -18,7 +18,6 @@
 	"dependencies": {
 		"mysql2": "^2.3.3",
 		"sequelize": "^6.21.3",
-		"uuid": "^8.3.2",
 		"validatorjs": "^3.22.1"
 	}
 }

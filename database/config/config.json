@@ -1,6 +1,6 @@
 {
   "development": {
-    "user": "root",
+    "username": "root",
     "password": "",
     "database": "library-db",
     "host": "localhost",
@@ -8,7 +8,7 @@
     "dialect": "mysql"
   },
   "production": {
-    "user": "root",
+    "username": "root",
     "password": "",
     "database": "library-db",
     "host": "localhost",
